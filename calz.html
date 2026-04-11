@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 40px;
+    background: hsl(0, 90%, 20%);
+    color: #000;
+    transition: 0.3s;
+  }
+  
+  .card {
+    
+    padding:25px;
+    margin:25px auto;
+    border-radius:10px;
+    max-width:700px;
+    box-shadow:0 0 10px rgba(0,0,0,0.5);
+    color: white;
+  
+  }
+
+  .dark {
+    background: #121212;
+    color: #fff;
+  }
+
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    margin: 0 auto 15px;
+  }
+
+  button {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+
+  input {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .dark input {
+    background: #333;
+    color: #fff;
+    border: 1px solid #555;
+  }
+
+  .buttons input {
+    width: 60px;
+    margin: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+
+<div class="card">
+<body>
+
+<div class="top-bar">
+  <button onclick="toggleAlert()" id="alertBtn">Alert OFF</button>
+  <button onclick="toggleDark()">Dark Mode</button>
+</div>
+
+<h1>Simple Calculator</h1>
+
+<input type="number" id="val1" placeholder="Enter a first number">
+<input type="number" id="val2" placeholder="Enter a second number"><br><br>
+
+<div class="buttons">
+  <input type="button" value="+" id="add" onclick="opr(this.id)">
+  <input type="button" value="-" id="minus" onclick="opr(this.id)">
+  <input type="button" value="×" id="multiply" onclick="opr(this.id)">
+  <input type="button" value="÷" id="divide" onclick="opr(this.id)">
+  <input type="button" value="Reset" onclick="re()">
+</div>
+
+<br>
+
+<input type="text" id="res" placeholder="Result">
+
+<script>
+let alertOn = false;
+
+function toggleAlert() {
+  alertOn = !alertOn;
+  document.getElementById("alertBtn").innerText = alertOn ? "Alert ON" : "Alert OFF";
+}
+
+function opr(choice) {
+  let val1 = parseFloat(document.getElementById("val1").value);
+  let val2 = parseFloat(document.getElementById("val2").value);
+  let result;
+
+  switch(choice) {
+    case 'add':
+      result = val1 + val2;
+      break;
+    case 'minus':
+      result = val1 - val2;
+      break;
+    case 'multiply':
+      result = val1 * val2;
+      break;
+    case 'divide':
+      result = val2 !== 0 ? val1 / val2 : "Error";
+      break;
+  }
+
+  document.getElementById("res").value = result;
+}
+
+function re() {
+  document.getElementById("val1").value = "";
+  document.getElementById("val2").value = "";
+  document.getElementById("res").value = "";
+}
+
+function toggleDark() {
+  document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>
